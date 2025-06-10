@@ -1,0 +1,25 @@
+// language-configuration.json
+// This file provides more advanced language features like bracket matching, comment toggling, and folding.
+{
+  "comments": {
+    "lineComment": "COMMENT: "
+  },
+  "brackets": [["[", "]"]],
+  "autoClosingPairs": [
+    ["[", "]"],
+    ["\"", "\""],
+    ["'", "'"]
+  ],
+  "surroundingPairs": [
+    ["[", "]"],
+    ["\"", "\""],
+    ["'", "'"]
+  ],
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+  "folding": {
+    "markers": {
+      "start": "(^\\.(header|main|proclist|patt|prefid|findinfo|fid1|fid2|skipinfo|substrateidinfo|locinfo|moduleinfo|fidcontrolinfo)(:\\s*\\w+)?$|^\\[(Two-Fid Frame Find|Edge Finder)\\]$)",
+      "end": "(^\\.(end|endproclist|endpattlist|endprefid|endfid1|endfid2|endfindinfo|endskipinfo|endsubstrateidinfo|endlocinfo|endmoduleinfo|endfidcontrolinfo)$)"
+    }
+  }
+}

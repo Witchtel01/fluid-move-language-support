@@ -1,0 +1,102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Fluid Move",
+  "scopeName": "source.fmw",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#sections"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#commands"
+    },
+    {
+      "include": "#keyValuePairs"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#nestedBlocks"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "name": "comment.line.fmw",
+      "match": "(COMMENT:)(.*)$"
+    },
+    "sections": {
+      "patterns": [
+        {
+          "name": "keyword.control.section.fmw",
+          "match": "^\\.(endproclist|endpattlist|endprefid|endfid1|endfid2|endfindinfo|endskipinfo|endsubstrateidinfo|endlocinfo|endmoduleinfo|endfidcontrolinfo|end|header|main|proclist|pattlist|prefid|fid1|fid2|findinfo|skipinfo|substrateidinfo|locinfo|moduleinfo|fidcontrolinfo)$"
+        },
+        {
+          "name": "keyword.control.section.definition.fmw",
+          "match": "(\\.(patt|ref frame|fid1|fid2|findinfo|skipinfo|substrateidinfo|locinfo|moduleinfo|fidcontrolinfo))(:\\s*\\w+)?$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.fmw",
+          "match": "\\b(version|units|macro|cursorLoc|fluid1Filename|fluid2Filename|heater1Filename|heater2Filename|heater3Filename|heater4Filename|Attach Fluid File|Attach Heater File|Valve 1 Refill Mode|Valve 2 Refill Mode|Move to First Fid Location|Move To System Location|System Location Name|Set Active Valve|Batch Fids|Pipeline Vision|Find Fids On-the-Fly|Use FoF High-Accuracy Mode|FoF High-Accuracy Trigger Angle \\(deg\\)|ADS Conveyor 2 Base Angle|ADS Dispense X Offset|ADS Dispense Y Offset|Automatic Conveyor Width|Automatic Conveyor Width Tolerance|Automatic Conveyor Width Enabled|Automatic Conveyor 2 Width|Automatic Conveyor 2 Width Tolerance|Automatic Conveyor 2 Width Enabled|CAD Import Generated File|Force HS on new pattern \\(HS SEL Only\\)|Fid Search At Safe Z|Batch Height Sense Commands|Batch Height Sense Probe Down|Pre-Heat Time|Apply Camera Rotation Correction|Max time board remains at dispense\\(sec\\)|Dual Dispense MFC Tolerance|Default Runtime Light Level Enabled|Default Runtime Light Level 1|Default Runtime Light Level 2|Default Runtime Light Level 3|Default Runtime Light Level 4|Default Runtime Light Level 5|Map File Control \\(ON/OFF\\)|Conveyor 1 Mode|Conveyor 2 Mode|Dual Valve Key Pattern|Pocket Depth of Carrier|Substrate Thickness|Barcode Disable|Workpiece Fiducial Failure Mode|Map Origin Used In Program|ESR99_015478 Parms|Board Unit Count|Use Program Max Height Sense Search Depth|Program Max Height Sense Search Depth \\(FMW\\)|ADS Program Pitch\\(mm\\)|Unit Counting Pattern|Recipe LMO Mode|ESR7283540 Heater Monitor Parm List|Prompt On AOI Fail|Batch Pattern Barcode Option|ESR7292657 V1 Syringe Scan System Loc|ESR7292657 V2 Syringe Scan System Loc|ESR7292657 V1 Syringe Scan Enable|ESR7292657 V2 Syringe Scan Enable|ESR7292657 V1 Syringe Scan Verification|ESR7292657 V2 Syringe Scan Verification|Fid Name|Expected Loc|Expected Angle \\(loc degs\\)|Owner Name|Is Valid|Check Tol|Use Local Tol|Local Tol|Light Level|Light 1 Level|Shutter 1 Open|Light 1 Pixel Avg|Light 2 Level|49.938950|Shutter 2 Open|Light 2 Pixel Avg|Light 3 Level|Shutter 3 Open|Light 3 Pixel Avg|Light 4 Level|Shutter 4 Open|Light 4 Pixel Avg|Light 5 Level|Shutter 5 Open|Light 5 Pixel Avg|Settling Time \\(msecs\\)|Camera Gain \\(0->12\\)|Camera LUT Gamma \\(0\\.5->1\\.5\\)|Fiducial Fail Option|Pause After Search|Min Fid Acceptance Confidence Level|Max Fid Acceptance Confidence Level|Min Fid Prompt Confidence Level|Use Local Fid-Not-Found Option|Defines Module IDs)\\b"
+        }
+      ]
+    },
+    "commands": {
+      "patterns": [
+        {
+          "name": "support.function.command.fmw",
+          "match": "\\b(SET HEIGHT SENSE MODE:|SET ZFAST MODE:|DO:|PURGE:|DOT:|STEP AND REPEAT:)\\b"
+        }
+      ]
+    },
+    "keyValuePairs": {
+      "name": "variable.parameter.fmw",
+      "match": "^\\s*([a-zA-Z0-9 _\\-\\(,\\)]+)\\s*=\\s*(.*)$"
+    },
+    "booleans": {
+      "name": "constant.language.boolean.fmw",
+      "match": "\\b(ON|OFF|true|false)\\b"
+    },
+    "numbers": {
+      "name": "constant.numeric.fmw",
+      "match": "\\b-?\\d+(\\.\\d+)?\\b"
+    },
+    "strings": {
+      "name": "string.quoted.fmw",
+      "match": "\"[^\"]*\"|'[^']*'|\\b[a-zA-Z0-9_\\-\\.]+\\.(htc|txt|csv)\\b"
+    },
+    "nestedBlocks": {
+        "patterns": [
+            {
+                "begin": "\\[(Two-Fid Frame Find|Edge Finder)\\]",
+                "beginCaptures": {
+                    "1": { "name": "entity.name.tag.fmw" }
+                },
+                "end": "(?!\\G)(?=\\.(endfindinfo|endfid1|endfid2))",
+                "patterns": [
+                    { "include": "#comments" },
+                    { "include": "#keyValuePairs" },
+                    { "include": "#booleans" },
+                    { "include": "#numbers" },
+                    { "include": "#strings" }
+                ]
+            }
+        ]
+    }
+  }
+}
