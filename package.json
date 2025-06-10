@@ -3,6 +3,9 @@
   "displayName": "FMW Language Support",
   "description": "Provides syntax highlighting for custom files with .fmw extensions.",
   "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/Witchtel01/fluid-move-language-support"
+  },
   "engines": {
     "vscode": "^1.75.0"
   },
